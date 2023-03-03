@@ -1,57 +1,44 @@
-import React from 'react';
-import logo from './logo.svg';
-import { Counter } from './features/counter/Counter';
+import React, { useState } from 'react';
+import { Route, Routes } from 'react-router-dom';
 import './App.css';
+import { AccountPage } from './Pages/AccountPage/AccountPage';
+import { Bag } from './Pages/Bag/Bag';
+import { HomePage } from './Pages/HomePage/HomePage';
+import { PageNotFound } from './Pages/PageNotFound/PageNotFound';
+import { Products } from './types/Products';
 
 function App() {
+  const [productCount, setProductCount] = useState(1);
+  const [bagList, setBagList] = useState<Products[]>([]);
+  const setInBag = (args: Products[], arg: Products) => {
+    setBagList([...args, arg]);
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <Counter />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <span>
-          <span>Learn </span>
-          <a
-            className="App-link"
-            href="https://reactjs.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            React
-          </a>
-          <span>, </span>
-          <a
-            className="App-link"
-            href="https://redux.js.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Redux
-          </a>
-          <span>, </span>
-          <a
-            className="App-link"
-            href="https://redux-toolkit.js.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Redux Toolkit
-          </a>
-          ,<span> and </span>
-          <a
-            className="App-link"
-            href="https://react-redux.js.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            React Redux
-          </a>
-        </span>
-      </header>
-    </div>
+    <Routes>
+      <Route
+        path="/"
+        element={
+          <HomePage
+            bagList={bagList}
+            setBagList={setInBag}
+            productCount={productCount}
+          />
+        }
+      />
+      <Route
+        path="/bag"
+        element={
+          <Bag
+            bagList={bagList}
+            setBagList={setBagList}
+            setProductCount={setProductCount}
+          />
+        }
+      />
+      <Route path='/account' element={<AccountPage />} />
+      <Route path="*" element={<PageNotFound />} />
+    </Routes>
   );
 }
 

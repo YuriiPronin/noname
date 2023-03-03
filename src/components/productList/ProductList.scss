@@ -1,0 +1,41 @@
+$cardHeight: 550px;
+$imageHeight: 250px; //for change this height - better use biblioteque's inline 'height' in <CardMedia>, but dont forget change here//
+$buttonHeight: 20px;
+$contentMargin: 10px;
+$titleHeight: 80px;
+$defaultPadding: 16px;
+
+.renderCards {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.card {
+  width: 350px;
+  height: $cardHeight;
+  padding: 0;
+  margin: 0 10px 20px 20px;
+}
+
+.box {
+  margin: 0 0 20px 20px;
+}
+
+.form {
+  width: 150px;
+}
+
+.cardTitle {
+  height: $titleHeight;
+  margin-bottom: $contentMargin;
+}
+
+.cardPrice {
+  height: $cardHeight - $imageHeight - $titleHeight - $buttonHeight -
+    ($contentMargin * 3) - ($defaultPadding * 2);
+  margin-bottom: $contentMargin;
+}
+
+.cardButton {
+  height: $buttonHeight;
+}
